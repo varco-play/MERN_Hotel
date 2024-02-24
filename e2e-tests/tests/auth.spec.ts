@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-const UI_URL = "http://localhost:7000";
+const UI_URL = "http://localhost:5173";
 const random = Math.floor(Math.random() * 565) * 984;
 
 test("should allow the user to sign in", async ({ page }) => {
