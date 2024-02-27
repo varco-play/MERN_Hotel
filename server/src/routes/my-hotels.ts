@@ -1,9 +1,11 @@
 import express from "express";
 import multer from "multer";
+import Hotel from "../models/hotel";
 import verifyToken from "../middleware/auth";
-import cloudinary from "cloudinary"
-import {hotel} from "../controllers/hotel"
+import cloudinary from "cloudinary";
+import { hotel } from "../controllers/hotel";
 import { body } from "express-validator";
+import { Request, Response } from "express";
 
 const router = express.Router();
 
@@ -36,7 +38,15 @@ router.post(
   upload.array("imageFiles", 6),
   hotel
 );
- 
+router.get("/", verifyToken, async (req: Request, res: Response) => {
+  try {
+    const hotels = await Hotel.find({ userId: req.userId });
+    res.status(201).json(hotels);
+  } catch (err) {
+    res.status(500).json("Server error");
+    console.log(`error in my hotels.ts`, err);
+  }
+});
 
 export async function uploadImages(imageFiles: Express.Multer.File[]) {
   const uploadPromises = imageFiles.map(async (image) => {
@@ -50,6 +60,4 @@ export async function uploadImages(imageFiles: Express.Multer.File[]) {
   return imageUrls;
 }
 
-
-
-export default router
+export default router;

@@ -1,6 +1,9 @@
-import Hotel, { HotelType } from "../models/hotel";
+import Hotel from "../models/hotel";
 import {uploadImages} from "../routes/my-hotels"
 import { Request, Response } from "express";
+import { HotelType } from "../shared/types";
+
+
 
 export const hotel =   async (req: Request, res: Response) => {
   try {

@@ -76,9 +76,9 @@ const Login = () => {
       </label>
       <span className="flex items-center justify-between">
         <span className="text-sm">
-          Not registered?
+          Not registered? 
           <Link className="underline" to="/register">
-            Create an account here
+             Create an account here
           </Link>
         </span>
         <button

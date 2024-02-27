@@ -1,5 +1,6 @@
 import { RegisterFormData } from "./pages/Register";
 import { LoginFormData } from "./pages/Login";
+import { HotelType } from "../../server/src/shared/types";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
@@ -19,7 +20,6 @@ export const register = async (formData: RegisterFormData) => {
     throw new Error(responseBody.message);
   }
 };
-
 export const login = async (formData: LoginFormData) => {
   const response = await fetch(`${API_BASE_URL}/api/users/login`, {
     method: "POST",
@@ -37,7 +37,6 @@ export const login = async (formData: LoginFormData) => {
   }
   return body;
 };
-
 export const logout = async () => {
   try {
     const response = await fetch(`${API_BASE_URL}/api/users/logout`, {
@@ -45,7 +44,6 @@ export const logout = async () => {
     });
 
     if (!response.ok) throw new Error("Error during sign out");
-
   } catch (err) {
     console.log(err);
   }
@@ -61,8 +59,6 @@ export const validateToken = async () => {
 
   return response.json();
 };
-
-
 export const addMyHotel = async (hotelFormData: FormData) => {
   const response = await fetch(`${API_BASE_URL}/api/my-hotels/`, {
     method: "POST",
@@ -76,3 +72,16 @@ export const addMyHotel = async (hotelFormData: FormData) => {
 
   return response.json();
 };
+export const getMyHotels = async (): Promise<HotelType[]> => {
+  const response = await fetch(`${API_BASE_URL}/api/my-hotels`, {
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Error fetching hotels");
+  }
+  console.log(response);
+  return response.json();
+};
+
+getMyHotels()
