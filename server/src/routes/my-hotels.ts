@@ -3,13 +3,14 @@ import multer from "multer";
 import Hotel from "../models/hotel";
 import verifyToken from "../middleware/auth";
 import cloudinary from "cloudinary";
-import { hotel } from "../controllers/hotel";
+import { createHotel, editHotel } from "../controllers/hotel";
 import { body } from "express-validator";
 import { Request, Response } from "express";
 
 const router = express.Router();
 
 const storage = multer.memoryStorage();
+
 const upload = multer({
   storage: storage,
   limits: {
@@ -36,7 +37,7 @@ router.post(
       .withMessage("Facilities are required"),
   ],
   upload.array("imageFiles", 6),
-  hotel
+  createHotel
 );
 router.get("/", verifyToken, async (req: Request, res: Response) => {
   try {
@@ -47,6 +48,21 @@ router.get("/", verifyToken, async (req: Request, res: Response) => {
     console.log(`error in my hotels.ts`, err);
   }
 });
+
+router.get("/:id", verifyToken, async (req: Request, res: Response) => {
+  const id = req.params.id.toString();
+  try {
+    const hotel = await Hotel.findOne({
+      _id: id,
+      userId: req.userId,
+    });
+    res.status(201).json(hotel);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching hotel" });
+  }
+});
+
+router.put("/:hotelId", verifyToken, upload.array("imageFiles"), editHotel);
 
 export async function uploadImages(imageFiles: Express.Multer.File[]) {
   const uploadPromises = imageFiles.map(async (image) => {

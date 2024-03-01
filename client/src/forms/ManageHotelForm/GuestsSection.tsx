@@ -6,6 +6,7 @@ const GuestsSection = () => {
     register,
     formState: { errors },
   } = useFormContext<HotelFormData>();
+
   return (
     <div>
       <h2 className="text-2xl font-bold mb-3">Guests</h2>
@@ -20,24 +21,25 @@ const GuestsSection = () => {
               required: "This field is required",
             })}
           />
-          {errors.adultCount && (
-            <span className="text-red-500 text-sm font-bold">
-              {errors.adultCount.message}
+          {errors.adultCount?.message && (
+            <span className="text-red-500 text-sm fold-bold">
+              {errors.adultCount?.message}
             </span>
           )}
         </label>
-
         <label className="text-gray-700 text-sm font-semibold">
           Children
           <input
             className="border rounded w-full py-2 px-3 font-normal"
             type="number"
             min={0}
-            {...register("childCount", {required: "This field is required"})}
+            {...register("childCount", {
+              required: "This field is required",
+            })}
           />
-          {errors.childCount && (
-            <span className="text-red-500 text-sm font-bold">
-              {errors.childCount.message}
+          {errors.childCount?.message && (
+            <span className="text-red-500 text-sm fold-bold">
+              {errors.childCount?.message}
             </span>
           )}
         </label>
