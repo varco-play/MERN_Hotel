@@ -58,7 +58,7 @@ const DetailsSection = () => {
         )}
       </label>
       <label className="text-gray-700 text-sm font-bold max-w-[50%]">
-        Price Per Night
+        Price Per Night ($)
         <input
           type="number"
           min={1}
@@ -82,7 +82,7 @@ const DetailsSection = () => {
           </option>
           {[1, 2, 3, 4, 5].map((num, index) => (
             <option key={index} value={num}>
-              {num}
+              {num} Stars
             </option>
           ))}
         </select>

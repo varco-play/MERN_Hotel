@@ -5,7 +5,8 @@ import { Request, Response } from "express";
 import cookieParser from "cookie-parser";
 import connectDB from "./utils/dbConnection";
 import path from "path";
-import myHotelRoutes from "./routes/my-hotels"
+import myHotelRoutes from "./routes/my-hotels";
+import hotelRoutes from "./routes/hotels";
 import { v2 as cloudinary } from "cloudinary";
 import "dotenv/config";
 
@@ -23,7 +24,7 @@ const PORT = process.env.PORT || 7000;
 app.use(
   cors({
     origin: process.env.FRONTEND_URL,
-    credentials: true, 
+    credentials: true,
   })
 );
 app.use(cookieParser());
@@ -33,7 +34,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../../client/dist")));
 
 app.use("/api/users", userRoutes);
-app.use("/api/my-hotels", myHotelRoutes)
+app.use("/api/my-hotels", myHotelRoutes);
+app.use("/api/hotels", hotelRoutes);
 
 app.get("*", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "../../client/dist/index.html"));
