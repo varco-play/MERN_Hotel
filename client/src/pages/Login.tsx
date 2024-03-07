@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import * as apiClient from "../api-client";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAppContext } from "../contexts/AppContext";
 import { Link } from "react-router-dom";
 
@@ -14,6 +14,7 @@ const Login = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { showToast } = useAppContext();
+  const location = useLocation();
 
   const {
     register,
@@ -26,7 +27,7 @@ const Login = () => {
       showToast({ message: "Signed in Successfuly", type: "SUCCESS" });
       await queryClient.invalidateQueries("validateToken");
       setTimeout(() => {
-        navigate("/");
+        navigate(location.state?.from?.pathname || "/"); //tells whether go to home page or to that page from where we came
       }, 2000);
     },
     onError: async (err: Error) => {
@@ -76,9 +77,9 @@ const Login = () => {
       </label>
       <span className="flex items-center justify-between">
         <span className="text-sm">
-          Not registered? 
+          Not registered?
           <Link className="underline" to="/register">
-             Create an account here
+            Create an account here
           </Link>
         </span>
         <button

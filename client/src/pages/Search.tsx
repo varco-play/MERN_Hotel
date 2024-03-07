@@ -54,7 +54,7 @@ const Search = () => {
     setSelectedHotelTypes((prevHotelTypes) =>
       event.target.checked
         ? [...prevHotelTypes, hotelType]
-        : prevHotelTypes.filter((hotelType) => hotelType !== hotelType)
+        : prevHotelTypes.filter((hotel) => hotel !== hotelType)
     );
   };
 
@@ -89,7 +89,7 @@ const Search = () => {
           />
           <PriceFilter
             selectedPrice={selectedPrice}
-            onChange={(val?: number) => setSelectedPrice(val)}
+            onChange={(value?: number) => setSelectedPrice(value)}
           />
         </div>
       </div>
@@ -114,20 +114,15 @@ const Search = () => {
             </option>
           </select>
         </div>
-        
         {hotelData?.data.map((hotel) => (
           <SearchResultCard hotel={hotel} />
         ))}
         <div>
-          {hotelData?.pagination.total === undefined || 0 ? (
-            ""
-          ) : (
-            <Pagination
-              page={hotelData?.pagination.page || 1}
-              pages={hotelData?.pagination.pages || 1}
-              onPageChange={(page) => setPage(page)}
-            />
-          )}
+          <Pagination
+            page={hotelData?.pagination.page || 1}
+            pages={hotelData?.pagination.pages || 1}
+            onPageChange={(page) => setPage(page)}
+          />
         </div>
       </div>
     </div>
