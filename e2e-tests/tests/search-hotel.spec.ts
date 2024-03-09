@@ -41,11 +41,11 @@ test("should show hotel detail", async ({ page }) => {
 test("should book hotel", async ({ page }) => {
   await page.goto(UI_URL);
 
-  await page.getByPlaceholder("Where are you going?").fill("Test City");
+  await page.getByPlaceholder("Where are you going?").fill("Uzbekistan");
 
   await page.getByRole("button", { name: "Search" }).click();
 
-  await page.getByText("Test Hotel").first().click();
+  await page.getByText("Rixas Sun Gate").first().click();
   await page.getByRole("button", { name: "Book Now" }).click();
 
   await expect(page.getByText("Total Cost: $1000.00")).toBeVisible();
@@ -62,5 +62,5 @@ test("should book hotel", async ({ page }) => {
   await expect(page.getByText("Booking Saved!")).toBeVisible();
 
   await page.getByRole("link", { name: "My Bookings" }).click();
-  await expect(page.getByText("Test Hotel")).toBeVisible();
+  await expect(page.getByText("Rixas Sun Gate")).toBeVisible();
 });

@@ -1,11 +1,13 @@
-import express, { Request, Response } from "express"; 
+import express, { Request, Response } from "express";
 import Hotel from "../models/hotel";
 import { BookingType, HotelSearchResponse } from "../shared/types";
 import { param, validationResult } from "express-validator";
 import Stripe from "stripe";
 import verifyToken from "../middleware/auth";
 
-const stripe = new Stripe(process.env.STRIPE_API_KEY as string);
+const stripe = new Stripe(
+  "sk_test_51NYBaJKZ5LUskmJNyVx7nDyPrNL5m12WLT3UfAe0ZS2JyVKZ8hywTqSffXBgmT3Wu9WrAK4Y3YwCT4LkCZwvfgEZ00Qum83NkR"
+);
 const router = express.Router();
 
 router.get("/search", async (req: Request, res: Response) => {

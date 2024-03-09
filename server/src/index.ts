@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import connectDB from "./utils/dbConnection";
 import path from "path";
 import myHotelRoutes from "./routes/my-hotels";
+import myBookings from "./routes/my-bookings"
 import hotelRoutes from "./routes/hotels";
 import { v2 as cloudinary } from "cloudinary";
 import "dotenv/config";
@@ -35,6 +36,7 @@ app.use(express.static(path.join(__dirname, "../../client/dist")));
 
 app.use("/api/users", userRoutes);
 app.use("/api/my-hotels", myHotelRoutes);
+app.use("/api/my-bookings", myBookings)
 app.use("/api/hotels", hotelRoutes);
 
 app.get("*", (req: Request, res: Response) => {
