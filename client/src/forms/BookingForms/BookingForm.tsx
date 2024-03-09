@@ -6,7 +6,7 @@ import {
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { StripeCardElement } from "@stripe/stripe-js";
 import { useSearchContext } from "../../contexts/SearchContext";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useMutation } from "react-query";
 import * as apiClient from "../../api-client";
 import { useAppContext } from "../../contexts/AppContext";
@@ -30,7 +30,6 @@ export type BookingFormData = {
 };
 
 const BookingForm = ({ currentUser, paymentIntent }: Props) => {
-  const navigate = useNavigate();
   const stripe = useStripe();
   const elements = useElements();
 
@@ -44,7 +43,6 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
     {
       onSuccess: () => {
         showToast({ message: "Booking Saved!", type: "SUCCESS" });
-        navigate("/");
       },
       onError: () => {
         showToast({ message: "Error saving booking", type: "ERROR" });
@@ -82,8 +80,6 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
       bookRoom({ ...formData, paymentIntentId: result.paymentIntent.id });
     }
   };
-
-  if (!paymentIntent) return <>Error in server</>;
 
   return (
     <form

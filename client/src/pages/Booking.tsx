@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import * as apiClient from "../api-client";
-import BookingForm from "../forms/BookingForms/BookingForm";    
+import BookingForm from "../forms/BookingForms/BookingForm";
 import { useSearchContext } from "../contexts/SearchContext";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -55,7 +55,7 @@ const Booking = () => {
   }
 
   return (
-    <div className="grid md:grid-cols-[1fr_2fr] gap-1">
+    <div className="grid md:grid-cols-[1fr_2fr]">
       <BookingDetailsSummary
         checkIn={search.checkIn}
         checkOut={search.checkOut}
