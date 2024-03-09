@@ -26,9 +26,9 @@ const Detail = () => {
         <span className="flex items-center">
           {Array.from({ length: hotel.starRating }).map(() => (
             <>
-              <AiFillStar className="fill-yellow-400" /> 
+              <AiFillStar className="fill-yellow-400" />
             </>
-          ))} <p className="pl-2">stars</p>
+          ))}{" "}
         </span>
         <h1 className="text-3xl font-bold">{hotel.name}</h1>
       </div>
@@ -44,7 +44,9 @@ const Detail = () => {
           </div>
         ))}
       </div>
-
+      <div className="flex items-center gap-1">
+        <p className="font-bold text-lg">Location: </p>  {hotel.country}, {hotel.city}
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-2">
         {hotel.facilities.map((facility) => (
           <div className="border border-slate-300 rounded-sm p-3">
@@ -53,7 +55,7 @@ const Detail = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr]">
+      <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-3">
         <div className="whitespace-pre-line">{hotel.description}</div>
         <div className="h-fit">
           <GuestInfoForm

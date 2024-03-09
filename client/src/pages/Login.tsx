@@ -77,8 +77,8 @@ const Login = () => {
       </label>
       <span className="flex items-center justify-between">
         <span className="text-sm">
-          Not registered?
-          <Link className="underline" to="/register">
+          Not registered?  
+          <Link className="underline ml-1" to="/register">
             Create an account here
           </Link>
         </span>

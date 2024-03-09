@@ -3,9 +3,22 @@ import { Request, Response } from "express";
 import { check } from "express-validator";
 import { registration, login } from "../controllers/auth";
 import verifyToken from "../middleware/auth";
+import User from "../models/user";
 
 const router = express.Router();
 
+router.get("/me", verifyToken, async (req: Request, res: Response) => {
+  const userId = req.userId;
+  try {
+    const user = await User.findById(userId).select("-password");
+    if (!user) return res.status(404).json("user not found");
+
+    res.status(200).json(user);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json("Some error");
+  }
+});
 router.post(
   "/register",
   [

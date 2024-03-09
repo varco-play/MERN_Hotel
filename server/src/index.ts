@@ -1,4 +1,4 @@
-import express from "express";
+import express from "express"; 
 import cors from "cors";
 import userRoutes from "./routes/users";
 import { Request, Response } from "express";
@@ -24,10 +24,10 @@ const PORT = process.env.PORT || 7000;
 app.use(
   cors({
     origin: process.env.FRONTEND_URL, 
-    credentials: true,
+    credentials: true, 
   })
 );
-app.use(cookieParser()); 
+app.use(cookieParser());          
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
