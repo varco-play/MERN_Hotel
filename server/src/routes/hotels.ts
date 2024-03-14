@@ -50,7 +50,6 @@ router.get("/search", async (req: Request, res: Response) => {
     };
 
     res.json(response);
-    console.log(response);
   } catch (error) {
     console.log("error", error);
     res.status(500).json({ message: "Something went wrong" });
